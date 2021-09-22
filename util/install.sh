@@ -85,7 +85,7 @@ KERNEL_HEADERS=kernel-headers-${KERNEL_NAME}
 # Treat Raspbian as Debian
 [ "$DIST" = 'Raspbian' ] && DIST='Debian'
 
-DISTS='Ubuntu|Debian|Fedora|RedHatEnterpriseServer|SUSE LINUX|CentOS'
+DISTS='Pop|Ubuntu|Debian|Fedora|RedHatEnterpriseServer|SUSE LINUX|CentOS'
 if ! echo $DIST | egrep "$DISTS" >/dev/null; then
     echo "Install.sh currently only supports $DISTS."
     exit 1
@@ -188,9 +188,9 @@ function mn_wifi_deps {
     pushd $MININET_DIR/containernet
     if [ -d mininet-wifi ]; then
       echo "Removing Mininet-WiFi dir..."
-      rm -r mininet-wifi
+    #   rm -r mininet-wifi remoção desabilitada para não sobrescrever mininet-wifi/util/install.sh que permitei intalar no Pop OS 20.04
     fi
-    sudo git clone --depth=1 https://github.com/intrig-unicamp/mininet-wifi.git
+    # sudo git clone --depth=1 https://github.com/intrig-unicamp/mininet-wifi.git
     pushd $MININET_DIR/containernet/mininet-wifi
     sudo util/install.sh -Wlnfv
     sudo PYTHON=${PYTHON} make install
